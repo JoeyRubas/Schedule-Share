@@ -1,0 +1,69 @@
+
+{%extends 'layout.html' %}
+{% block body %}
+
+{% for error in errors %}
+
+<text style="color:red">{{error}}</text><br>
+
+
+{% endfor %}
+
+        <form action="" method="post" class="form-group">
+                First name: {{form.fname(class="form-control", value=results["fname"])}} <br>
+                Last name:  {{form.lname(class="form-control", value=results["lname"])}}<br>
+                School: {{form.school(class="form-control", value=results["school"])}}
+        
+                <table class="table">
+                    <tr>
+                        <th>Period</th>
+                        <th>Class Code</th>
+                        <!--<th>School</th>-->
+                    </tr>
+                    
+                    <tr>
+                        <td>1</td>
+                        <td>{{form.p1(class="form-control", value=results["p1"])}}</td>
+                    </tr>
+                           
+                    <tr>
+                        <td>2</td>
+                        <td>{{form.p2(class="form-control", value=results["p2"])}}</td>
+                    </tr>
+                           
+                    <tr>
+                        <td>3</td>
+                        <td>{{form.p3(class="form-control", value=results["p3"])}}</td>
+                    </tr>
+                           
+                    <tr>
+                        <td>4</td>
+                        <td>{{form.p4(class="form-control", value=results["p4"])}}</td>
+                    </tr>
+                           
+                    <tr>
+                        <td>5</td>
+                        <td>{{form.p5(class="form-control", value=results["p5"])}}</td>
+                    </tr>
+                           
+                    <tr>
+                        <td>6</td>
+                        <td>{{form.p6(class="form-control", value=results["p6"])}}</td>
+                    </tr>
+                           
+                    <tr>
+                        <td>7</td>
+                        <td>{{form.p7(class="form-control", value=results["p7"])}}</td>
+                    </tr>
+                           
+                    <tr>
+                        <td>8</td>
+                        <td>{{form.p8(class="form-control", value=results["p8"])}}</td>
+                    </tr>
+                           
+                </table>
+
+                {{form.submit1(class = "btn btn-primary")}} 
+            </form>
+            
+{% endblock %}

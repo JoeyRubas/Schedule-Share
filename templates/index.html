@@ -1,0 +1,37 @@
+{%extends 'layout.html' %}
+
+{% block body %}
+<style>
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+      }
+      main {
+        background-color: rgb(231, 231, 231);
+        width: 100%;
+
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+    </style>
+    <!-- Custom styles for this template -->
+    <link href="cover.css" rel="stylesheet">
+
+
+  <main role="main" class="inner cover" >
+    <h1 class="cover-heading">Schedule<span style="color:cornflowerblue">Share</span></h1>
+    <p class="lead">The easiest way for District 203 students to share their schedules.</p><br>
+ 
+
+    <button onclick="window.location.href = '/signin';", class="btn btn-primary">Sign in Or Create Account with Google</button>
+    <br><br><br><br>
+</main>
+    {% endblock %}

@@ -1,0 +1,15 @@
+{%extends 'layout.html' %}
+
+{% block body %}
+<div class="list-group list-group-flush">
+        {% for num in range(results|length) %}
+    
+            <a href="/person/{{results[num][0]}}", class="list-group-item list-group-item-action">{{results[num][1]}}</a>
+
+
+        {% endfor %}
+</div>
+
+        
+    </table>
+{% endblock %}

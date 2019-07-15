@@ -1,0 +1,25 @@
+{%extends 'layout.html' %}
+
+{% block body %}
+
+<text class="display-4 font-weight-normal" >{{person["name"]}}</text>
+
+<div class="list-group"></div>
+    <table class="table">
+        <tr>
+            <th>Period</th>
+            <th>Class</th>
+        </tr>
+        {% for num in range(8) %}
+        <tr>
+            <td>{{num+1}}</td>
+            <td> <a href="{{"/class/" + person["schedule_ids"][num]}}", class="list-group-item list-group-item-action">{{person["schedule_names"][num]}}</a></td>
+        </tr>
+
+
+        {% endfor %}
+<div class="list-group"></div>
+
+        
+    </table>
+{% endblock %}
