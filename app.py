@@ -40,8 +40,6 @@ app.register_blueprint(blueprint, url_prefix="/login")
                            
 class SignUpForm(FlaskForm):
     """This class is for the primary form on the site. It creats all of the buttons for the acccount creation form"""
-    fname = StringField("fname")
-    lname = StringField("lname")
     school = SelectField("school", choices = [('NCHS', 'NCHS'), ('NNHS', 'NNHS')])
     p1 = StringField("p1")
     p2 = StringField("p2")
@@ -95,6 +93,7 @@ def index():
             if "id" not in session:
                 session["id"] = resp["email"][:resp["email"].index("@")]
                 session["email"] = resp["email"]
+                session["name"] = resp["given_name"]+" "+resp["family_name"]
                 print('Cookie Left', file=sys.stderr)
 
     if "id" in session:
@@ -200,10 +199,8 @@ def entry():
         #Creates the majority of the JSON just by directly refrencing the form data
         data = {"id":json1["email"][:json1["email"].index("@")],
                 "email":json1["email"],
-                 "fname":result["fname"],
-                 "lname":result["lname"],
                  "school":result["school"],
-                 "name":(result["fname"]+" "+result["lname"]).title(),
+                 "name":session["name"].title(),
                  "schedule_ids":[result["school"][1:2]+result["p"+str(num+1)] for num in range(8)],
                  "schedule_names":schedule_names}
         mongo.db.users.insert(data)
@@ -267,15 +264,14 @@ def edit():
         except:
             errors.append("Please enter last name")
         if errors:
+            errors.append("If any of these errors are incorrect, please enter A and contact us at scheduleshare203@gmail.com")
             return render_template("entry_errors.html", form = form, search = search, errors = errors, results = result)
 
         
         data = {"id":start["id"],
                 "email":start["email"],
-                "fname":result["fname"],
-                "lname":result["lname"],
                 "school":result["school"],
-                "name":result["fname"]+" "+result["lname"],
+                "name":start["name"],
                 "schedule_ids":[result["school"][1:2]+result["p"+str(num+1)] for num in range(8)],
                 "schedule_names":schedule_names}
         mongo.db.users.update({"id":id1}, {"$set":data})
