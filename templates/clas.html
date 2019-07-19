@@ -1,6 +1,8 @@
 {%extends 'layout.html' %}
 
 {% block body %}
+
+<text class="display-4 font-weight-normal" >{{clas["name"]}}</text>
 <div class="list-group list-group-flush">
         {% for num in range(clas["students_id"]|length) %}
     
