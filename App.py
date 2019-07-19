@@ -1,4 +1,4 @@
-from flask import Flask, json, render_template, request, redirect, url_for, jsonify, session, g
+from flask import Flask, json, render_template, request, redirect, url_for, jsonify, session
 from flask_wtf import FlaskForm
 from wtforms import StringField, SelectField, SubmitField
 import os
@@ -71,12 +71,7 @@ def search_results(text):
 
 
 
-@app.before_request
-def before_request():
-    g.user = none
-    if "id" in session:
-        g.id = session["id"]
-        g.email = session["email"]
+
 
 
 
@@ -141,7 +136,7 @@ def privacy():
 @app.route("/entry/", methods=["get", "post"])
 def entry():
     """Very long function; gets data from the primary form and used it to create a user json, add user to all their classes' jsons and the site directory"""
-    if not g.user:
+    if not google.authorized:
         redirect("/")
     resp = google.get("/oauth2/v1/userinfo")
     json1 = resp.json()
@@ -227,11 +222,11 @@ def entry():
 
 @app.route("/edit/", methods=["get", "post"])
 def edit():
-    if not g.user:
+    if not "id" in session:
         return redirect("/")
 
     
-    id1 = g.id
+    id1 = session["id"]
     form = SignUpForm()
     start = mongo.db.users.find_one_or_404({"id":id1})
     search = Search()
@@ -300,7 +295,7 @@ def edit():
 
 @app.route("/person/<string:id1>", methods=["get", "post"])
 def person(id1):
-    if not g.user:
+    if not "id" in session:
         return redirect("/")
     search = Search()
     if search.is_submitted():
@@ -311,7 +306,7 @@ def person(id1):
 
 @app.route("/class/<string:id1>", methods=["get", "post"])
 def clas(id1):
-    if not g.user:
+    if not "id" in session:
         return redirect("/")
     search = Search()
     if search.is_submitted():
