@@ -203,6 +203,7 @@ def entry():
                 mongo.db.clas.update_one({"id":clas1}, {"$set":before})
                        
             else:
+                num = data["schedule_ids"].index(clas1)
                 data1 = {"id":clas1,
                           "name":convert[result["p"+str(num+1)][:result["p"+str(num+1)].index("-")]],
                           "students_id":[data["id"]],
