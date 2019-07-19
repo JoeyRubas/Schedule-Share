@@ -16,7 +16,7 @@ import redis
 app = Flask(__name__)
 
 #IDK what this does some tutorial told me to do it
-app.config["SECRET_KEY"] = os.urandom(24)
+app.config["SECRET_KEY"] = "DJFUEFUDJDHFNSHDISWIDEWE"
 app.config["MONGO_URI"]= 'mongodb+srv://Joey_Rubas:2ezr9fzG3dTFw3F@schedule-share-nlmri.mongodb.net/test?retryWrites=true&w=majority'
 mongo = PyMongo(app)
 
