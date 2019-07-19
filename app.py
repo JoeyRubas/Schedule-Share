@@ -189,7 +189,7 @@ def entry():
         except:
             errors.append("Please enter last name")
         if errors:
-            errors.append("If any of these errors are incorrect, please enter A and contact us at scheduleshare203@gmail.com or 
+            errors.append("If any of these errors are incorrect, please enter A and contact us at scheduleshare203@gmail.com")
             return render_template("entry_errors.html", form = form, search = search, errors = errors, results = result)
         
                 
