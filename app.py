@@ -178,14 +178,6 @@ def entry():
                 schedule_names.append(convert[result["p"+str(num+1)][:result["p"+str(num+1)].index("-")]])
             except:
                 errors.append("Issue with code for period #"+str(num+1))
-        try:
-            if not result["fname"]:
-                errors.append("Please enter first name")
-        except:
-            errors.append("Please enter first name")
-        try:
-            if not result["lname"]:
-                errors.append("Please enter last name")
         except:
             errors.append("Please enter last name")
         if errors:
@@ -252,15 +244,7 @@ def edit():
             try:
                 schedule_names.append(convert[result["p"+str(num+1)][:result["p"+str(num+1)].index("-")]])
             except:
-                errors.append("Issue with code for period #"+str(num+1))
-        try:
-            if not result["fname"]:
-                errors.append("Please enter first name")
-        except:
-            errors.append("Please enter first name")
-        try:
-            if not result["lname"]:
-                errors.append("Please enter last name")
+                errors.append("Issue with code for period #"+str(num+1)
         except:
             errors.append("Please enter last name")
         if errors:
