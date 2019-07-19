@@ -5,8 +5,7 @@ import os
 from flask_pymongo import PyMongo
 from flask_dance.contrib.google import make_google_blueprint, google
 import sys
-import redis
-
+from flask_talisman import Talisman
 
 
 
@@ -16,8 +15,10 @@ import redis
 app = Flask(__name__)
 
 #IDK what this does some tutorial told me to do it
-app.config["SECRET_KEY"] = "DJFUEFUDJDHFNSHDISWIDEWE"
+app.config["SECRET_KEY"] = os.urandom(24)
+Talisman(app)
 app.config["MONGO_URI"]= 'mongodb+srv://Joey_Rubas:2ezr9fzG3dTFw3F@schedule-share-nlmri.mongodb.net/test?retryWrites=true&w=majority'
+
 mongo = PyMongo(app)
 
 
@@ -33,8 +34,8 @@ blueprint = make_google_blueprint(
     scope = ["https://www.googleapis.com/auth/userinfo.email", "https://www.googleapis.com/auth/userinfo.profile", "openid"])
 app.register_blueprint(blueprint, url_prefix="/login")
 
-SESSION_TYPE = environ.get('SESSION_TYPE')
-SESSION_REDIS = redis.from_url(os.environ.get('SESSION_REDIS'))
+
+
                            
 class SignUpForm(FlaskForm):
     """This class is for the primary form on the site. It creats all of the buttons for the acccount creation form"""
