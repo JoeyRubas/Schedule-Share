@@ -98,7 +98,7 @@ def index():
 
     if "id" in session:
         print('Not index', file=sys.stderr)
-        c = mongo.db.users.find_one_or_404({'id': session["id"]})
+        c = mongo.db.users.find_one({'id': session["id"]})
         if c:
             l = "person/"+session["email"][:session["email"].index("@")]
             return redirect("person/"+session["email"][:session["email"].index("@")])
