@@ -5,7 +5,7 @@ import os
 from flask_pymongo import PyMongo
 from flask_dance.contrib.google import make_google_blueprint, google
 import sys
-from flask_talisman import Talisman
+#from flask_talisman import Talisman
 
 
 
@@ -16,7 +16,7 @@ app = Flask(__name__)
 
 #IDK what this does some tutorial told me to do it
 app.config["SECRET_KEY"] = os.urandom(24)
-Talisman(app)
+#Talisman(app)
 app.config["MONGO_URI"]= 'mongodb+srv://Joey_Rubas:2ezr9fzG3dTFw3F@schedule-share-nlmri.mongodb.net/test?retryWrites=true&w=majority'
 
 mongo = PyMongo(app)
