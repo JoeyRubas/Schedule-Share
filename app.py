@@ -242,7 +242,7 @@ def edit():
             try:
                 schedule_names.append(convert[result["p"+str(num+1)][:result["p"+str(num+1)].index("-")]])
             except:
-                errors.append("Issue with code for period #"+str(num+1)
+                errors.append("Issue with code for period #"+str(num+1))
         if errors:
             errors.append("If any of these errors are incorrect, please enter A and contact us at scheduleshare203@gmail.com")
             return render_template("entry_errors.html", form = form, search = search, errors = errors, results = result)
