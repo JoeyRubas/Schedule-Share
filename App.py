@@ -98,7 +98,7 @@ def index():
 
     if "id" in session:
         print('Not index', file=sys.stderr)
-        c = mongo.db.users.find({'id': session["id"]})
+        c = mongo.db.users.find_one_or_404({'id': session["id"]})
         if c:
             l = "person/"+session["email"][:session["email"].index("@")]
             return redirect("person/"+session["email"][:session["email"].index("@")])
@@ -320,7 +320,7 @@ def clas(id1):
 
     return render_template("clas.html", clas=mongo.db.clas.find_one_or_404({"id":id1}), search = search)
 
-#debug = True
+#
 
 if __name__ == "__main__":
     app.run()
