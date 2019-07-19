@@ -4,16 +4,21 @@ from wtforms import StringField, SelectField, SubmitField
 import os
 from flask_pymongo import PyMongo
 from flask_dance.contrib.google import make_google_blueprint, google
+import sys
+from flask_talisman import Talisman
 
 
-#os.environ['OAUTHLIB_INSECURE_TRANSPORT'] = '1'
+
+os.environ['OAUTHLIB_INSECURE_TRANSPORT'] = '1'
 
 #Initize App
 app = Flask(__name__)
 
 #IDK what this does some tutorial told me to do it
-app.config["SECRET_KEY"] = "kingcobble"
+app.config["SECRET_KEY"] = os.urandom(24)
+Talisman(app)
 app.config["MONGO_URI"]= 'mongodb+srv://Joey_Rubas:2ezr9fzG3dTFw3F@schedule-share-nlmri.mongodb.net/test?retryWrites=true&w=majority'
+
 mongo = PyMongo(app)
 
 
@@ -73,6 +78,8 @@ def search_results(text):
 
 
 
+
+
 @app.route("/", methods=["get", "post"])
 def index():
     """Very simple function for providing the home page html; only code other than the return is the search bar code"""
@@ -87,13 +94,13 @@ def index():
             if "id" not in session:
                 session["id"] = resp["email"][:resp["email"].index("@")]
                 session["email"] = resp["email"]
+                print('Cookie Left', file=sys.stderr)
 
     if "id" in session:
-        c = mongo.db.clas.find({'id': session["id"]})
-        print(c)
+        print('Not index', file=sys.stderr)
+        c = mongo.db.users.find_one_or_404({'id': session["id"]})
         if c:
             l = "person/"+session["email"][:session["email"].index("@")]
-            print(l)
             return redirect("person/"+session["email"][:session["email"].index("@")])
         else:
             return redirect("entry")
@@ -313,10 +320,10 @@ def clas(id1):
 
     return render_template("clas.html", clas=mongo.db.clas.find_one_or_404({"id":id1}), search = search)
 
-
+#
 
 if __name__ == "__main__":
-    app.run()
+    app.run(debug = True)
     
           
 
