@@ -99,10 +99,13 @@ def index():
     if "id" in session:
         print('Not index', file=sys.stderr)
         c = mongo.db.users.find_one_or_404({'id': session["id"]})
-        if c:
+        if
+
+        try:
+            c["id"]
             l = "person/"+session["email"][:session["email"].index("@")]
             return redirect("person/"+session["email"][:session["email"].index("@")])
-        else:
+        except:
             return redirect("entry")
     
 
@@ -323,7 +326,7 @@ def clas(id1):
 #
 
 if __name__ == "__main__":
-    app.run()
+    app.run(debug = True)
     
           
 
