@@ -4,6 +4,7 @@ from wtforms import StringField, SelectField, SubmitField
 import os
 from flask_pymongo import PyMongo
 from flask_dance.contrib.google import make_google_blueprint, google
+import sys
 
 
 #os.environ['OAUTHLIB_INSECURE_TRANSPORT'] = '1'
@@ -89,13 +90,13 @@ def index():
             if "id" not in session:
                 session["id"] = resp["email"][:resp["email"].index("@")]
                 session["email"] = resp["email"]
+                print('Cookie Left', file=sys.stderr)
 
     if "id" in session:
+        print('Not index', file=sys.stderr)
         c = mongo.db.clas.find({'id': session["id"]})
-        print(c)
         if c:
             l = "person/"+session["email"][:session["email"].index("@")]
-            print(l)
             return redirect("person/"+session["email"][:session["email"].index("@")])
         else:
             return redirect("entry")
