@@ -6,7 +6,7 @@ from flask_pymongo import PyMongo
 from flask_dance.contrib.google import make_google_blueprint, google
 
 
-os.environ['OAUTHLIB_INSECURE_TRANSPORT'] = '1'
+#os.environ['OAUTHLIB_INSECURE_TRANSPORT'] = '1'
 
 #Initize App
 app = Flask(__name__)
@@ -316,7 +316,7 @@ def clas(id1):
 
 
 if __name__ == "__main__":
-    app.run(debug =True)
+    app.run()
     
           
 
