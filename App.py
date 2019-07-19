@@ -9,7 +9,7 @@ from flask_talisman import Talisman
 
 
 
-#os.environ['OAUTHLIB_INSECURE_TRANSPORT'] = '1'
+os.environ['OAUTHLIB_INSECURE_TRANSPORT'] = '1'
 
 #Initize App
 app = Flask(__name__)
