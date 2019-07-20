@@ -179,7 +179,7 @@ def entry():
             except:
                 errors.append("Issue with code for period #"+str(num+1))
         if errors:
-            errors.append('If any of these errors are incorrect, please enter "A" in the cooresponding field and contact us at scheduleshare203@gmail.com')
+            errors.append('If any of these errors are incorrect, please enter "A-" in the cooresponding field and contact us at scheduleshare203@gmail.com')
             return render_template("entry_errors.html", form = form, search = search, errors = errors, results = result)
         
                 
@@ -303,6 +303,6 @@ def clas(id1):
 
 if __name__ == "__main__":
     app.run(debug = True)
-    
+   
           
 
