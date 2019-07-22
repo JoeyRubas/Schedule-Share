@@ -167,7 +167,9 @@ def entry():
     #this if statement funs when the form is submitted
     if form.submit1.data and form.is_submitted():
         
-
+        c = mongo.db.users.find_one({'id': session["id"]})
+        if not c:
+            return redirect("/")
 
         
         result = request.form#Gets data from form in a dictionary data format
@@ -302,7 +304,7 @@ def clas(id1):
 #
 
 if __name__ == "__main__":
-    app.run(debug = True)
+    app.run()
    
           
 
