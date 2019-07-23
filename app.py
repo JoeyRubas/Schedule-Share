@@ -71,7 +71,7 @@ def search_results(text):
     for person in query_results:
         #Checks if the search is in the person's name; if it is they are added to the list of results
         results.append((person["id"], person["name"]))#Here he add a tuple containing the persons name and id; This is because we need to display the name and need the id to genorate URLS
-    if results = []:
+    if results == []:
         results = [("No results", "#")]
     return render_template("search.html", search = search, results = results)#Renders the HTML, passing in the search results and the instance of the search class 
 
