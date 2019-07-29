@@ -16,10 +16,9 @@ from flask_sslify import SSLify
 app = Flask(__name__)
 
 #IDK what this does some tutorial told me to do it
-app.config["SECRET_KEY"] = os.urandom(24)
+app.config["SECRET_KEY"] = os.environ.get("SECRET")
 #Talisman(app)
-app.config["MONGO_URI"]= 'mongodb+srv://Joey_Rubas:2ezr9fzG3dTFw3F@schedule-share-nlmri.mongodb.net/test?retryWrites=true&w=majority'
-
+app.config["MONGO_URI"]= os.environ.get("MONGO_URI")
 mongo = PyMongo(app)
 
 SSLify(app)
@@ -29,8 +28,8 @@ convert = {"925611":"Link Lunch", "926611":"Link Leader Lunch", "A":"Missing Cla
 
 app.secret_key = os.urandom(24)
 blueprint = make_google_blueprint(
-    client_id="359396885878-d9i2rbunvhofagfsf20hfnu1uccmfuq3.apps.googleusercontent.com",
-    client_secret="_7TS1FAVj_D3QJD96J7gkoBm",
+    client_id=os.environ.get("GOOGLE_CLIENT_ID"),
+    client_secret=os.environ.get("GOOGLE_SECRET"),
     authorized_url= "/",
     scope = ["https://www.googleapis.com/auth/userinfo.email", "https://www.googleapis.com/auth/userinfo.profile", "openid"])
 app.register_blueprint(blueprint, url_prefix="/login")
