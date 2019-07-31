@@ -169,7 +169,7 @@ def entry():
     if form.submit1.data and form.is_submitted():
         
         c = mongo.db.users.find_one({'id': session["id"]})
-        if not c:
+        if c:
             return redirect("/")
 
         
