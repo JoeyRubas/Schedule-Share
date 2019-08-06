@@ -224,7 +224,10 @@ def entry():
 def edit():
     if not "id" in session:
         return redirect("/")
-
+    try:
+        session["email"].index("@stu.naperville203.org")
+    except:
+        return redirect("/")
     
     id1 = session["id"]
     form = SignUpForm()
