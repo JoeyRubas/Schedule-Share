@@ -63,15 +63,18 @@ def search_results(text):
     if not "id" in session:
         return redirect("/")
     search = Search()
-
+    
     #initialize the list of results
-    results =[]
-    query_results = mongo.db.users.find({"name":{"$regex" : ".*"+text.title()+".*"}})
-    for person in query_results:
+    if "<" in text or ">" in text:
+        results = ["Search cannot include < or >"]
+    else:
+        results =[]
+        query_results = mongo.db.users.find({"name":{"$regex" : ".*"+text.title()+".*"}})
+        for person in query_results:
         #Checks if the search is in the person's name; if it is they are added to the list of results
         results.append((person["id"], person["name"]))#Here he add a tuple containing the persons name and id; This is because we need to display the name and need the id to genorate URLS
-    if results == []:
-        results = [(session["id"], "No results")]
+        if results == []:
+            results = [(session["id"], "No results")]
     return render_template("search.html", search = search, results = results)#Renders the HTML, passing in the search results and the instance of the search class 
 
 
@@ -183,6 +186,8 @@ def entry():
                 schedule_names.append(convert[result["p"+str(num+1)][:result["p"+str(num+1)].index("-")]])
             except:
                 errors.append("Issue with code for period #"+str(num+1))
+            if ">" in result["p"+str(num+1)] or "<" in result["p"+str(num+1)]:
+                errors.append("Class codes cannot include < or > charaters")
         if errors:
             errors.append('If any of these errors are incorrect, please enter "A-" in the cooresponding field and contact us at scheduleshare203@gmail.com')
             return render_template("entry_errors.html", form = form, search = search, errors = errors, results = result)
@@ -252,6 +257,8 @@ def edit():
                 schedule_names.append(convert[result["p"+str(num+1)][:result["p"+str(num+1)].index("-")]])
             except:
                 errors.append("Issue with code for period #"+str(num+1))
+            if ">" in result["p"+str(num+1)] or "<" in result["p"+str(num+1)]:
+                errors.append("Class codes cannot include < or > charaters")
         if errors:
             errors.append("If any of these errors are incorrect, please enter A and contact us at scheduleshare203@gmail.com")
             return render_template("entry_errors.html", form = form, search = search, errors = errors, results = result)
@@ -297,6 +304,8 @@ def person(id1):
     if search.is_submitted():
         results = request.form
         return search_results(results["search"])
+    if "<" in id1 or ">" in id1:
+        return "ERROR, ids cannot inculde < or > charaters"
                                 
     return render_template("person.html",person = mongo.db.users.find_one_or_404({"id":id1}), search = search)
 
@@ -312,7 +321,8 @@ def clas(id1):
     if search.is_submitted():
         results = request.form
         return search_results(results["search"])
-
+    if "<" in id1 or ">" in id1:
+        return "ERROR, ids cannot inculde < or > charaters"
     return render_template("clas.html", clas=mongo.db.clas.find_one_or_404({"id":id1}), search = search)
 
 #
