@@ -286,6 +286,10 @@ def edit():
 def person(id1):
     if not "id" in session:
         return redirect("/")
+    try:
+        session["email"].index("@stu.naperville203.org")
+    except:
+        return redirect("/")
     search = Search()
     if search.is_submitted():
         results = request.form
@@ -295,6 +299,10 @@ def person(id1):
 
 @app.route("/class/<string:id1>", methods=["get", "post"])
 def clas(id1):
+    try:
+        session["email"].index("@stu.naperville203.org")
+    except:
+        return redirect("/")
     if not "id" in session:
         return redirect("/")
     search = Search()
