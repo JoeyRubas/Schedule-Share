@@ -136,6 +136,28 @@ def about():
     #Renders home page HTML, passing in the search bar class instance
     return render_template("about.html", search = search)
 
+@app.route("/how", methods=["get", "post"])
+def how():
+    """Basically same as home function"""
+    #Search Bar Code
+    search = Search()
+    if search.is_submitted():
+        results = request.form
+        return search_results(results["search"])
+    #Renders home page HTML, passing in the search bar class instance
+    return render_template("how.html", search = search)
+@app.route("/changelog", methods=["get", "post"])
+def change():
+    """Basically same as home function"""
+    #Search Bar Code
+    search = Search()
+    if search.is_submitted():
+        results = request.form
+        return search_results(results["search"])
+    #Renders home page HTML, passing in the search bar class instance
+    return render_template("changelog.html", search = search)
+
+
 @app.route("/privacy", methods=["get", "post"])
 def privacy():
     #Search Bar Code
