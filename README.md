@@ -1,2 +1,2 @@
 # Schedule-Share
-The easiest way for high school students from Illinois community unit school district 203 to share their schedules.
+The easiest way for high school students from Naperville Community Unit School District 203 to share their schedules.
