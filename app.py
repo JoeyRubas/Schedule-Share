@@ -73,7 +73,7 @@ def search_results(text):
             results.append(("/person/"+person["id"], person["name"]))#Here he add a tuple containing the persons name and id; This is because we need to display the name and need the id to genorate URLS
         for clas in query_results1:
         #Checks if the search is in the person's name; if it is they are added to the list of results
-            results.append(("/class"+clas["id"], clas["name"]))#Here he add a tuple containing the persons name and id; This is because we need to display the name and need the id to genorate URL
+            results.append(("/class/"+clas["id"], clas["name"]))#Here he add a tuple containing the class name and id; This is because we need to display the name and need the id to genorate URL
         if results == []:
             results = [(session["id"], "No results")]
     return render_template("search.html", search = search, results = results)#Renders the HTML, passing in the search results and the instance of the search class 
