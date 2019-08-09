@@ -84,7 +84,7 @@ def search_results(text):
 
 
 
-@app.route("/", methods=["get", "post"])
+@app.route("/", methods=["get"])
 def index():
     """Very simple function for providing the home page html; only code other than the return is the search bar code"""
     #Search bar code
@@ -125,7 +125,7 @@ def signin():
         return redirect("/")
 
 
-@app.route("/about", methods=["get", "post"])
+@app.route("/about", methods=["get"])
 def about():
     """Basically same as home function"""
     #Search Bar Code
@@ -136,7 +136,7 @@ def about():
     #Renders home page HTML, passing in the search bar class instance
     return render_template("about.html", search = search)
 
-@app.route("/how", methods=["get", "post"])
+@app.route("/how", methods=["get"])
 def how():
     """Basically same as home function"""
     #Search Bar Code
@@ -146,7 +146,7 @@ def how():
         return search_results(results["search"])
     #Renders home page HTML, passing in the search bar class instance
     return render_template("how.html", search = search)
-@app.route("/changelog", methods=["get", "post"])
+@app.route("/changelog", methods=["get"])
 def change():
     """Basically same as home function"""
     #Search Bar Code
@@ -158,7 +158,7 @@ def change():
     return render_template("changelog.html", search = search)
 
 
-@app.route("/privacy", methods=["get", "post"])
+@app.route("/privacy", methods=["get"])
 def privacy():
     #Search Bar Code
     search = Search()
@@ -315,7 +315,7 @@ def edit():
 
 
 
-@app.route("/person/<string:id1>", methods=["get", "post"])
+@app.route("/person/<string:id1>", methods=["get"])
 def person(id1):
     if not "id" in session:
         return redirect("/")
@@ -332,7 +332,7 @@ def person(id1):
                                 
     return render_template("person.html",person = mongo.db.users.find_one_or_404({"id":id1}), search = search)
 
-@app.route("/class/<string:id1>", methods=["get", "post"])
+@app.route("/class/<string:id1>", methods=["get"])
 def clas(id1):
     try:
         session["email"].index("@stu.naperville203.org")
