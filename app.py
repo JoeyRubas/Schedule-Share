@@ -70,7 +70,7 @@ def search_results(text):
         query_results1 = mongo.db.clas.find({"name":{"$regex" : ".*"+text.title()+".*"}})
         for person in query_results:
         #Checks if the search is in the person's name; if it is they are added to the list of results
-            results.append(("/user/"+person["id"], person["name"]))#Here he add a tuple containing the persons name and id; This is because we need to display the name and need the id to genorate URLS
+            results.append(("/person/"+person["id"], person["name"]))#Here he add a tuple containing the persons name and id; This is because we need to display the name and need the id to genorate URLS
         for clas in query_results1:
         #Checks if the search is in the person's name; if it is they are added to the list of results
             results.append(("/class"+clas["id"], clas["name"]))#Here he add a tuple containing the persons name and id; This is because we need to display the name and need the id to genorate URL
