@@ -117,7 +117,7 @@ def index():
     return render_template("index.html", search = search)
 
 
-@app.route("/signin", "post")
+@app.route("/signin")
 def signin():
     if not google.authorized:
         return redirect(url_for("google.login"))
