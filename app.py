@@ -226,20 +226,20 @@ def entry():
                 "email":json1["email"],
                  "school":result["school"],
                  "name":session["name"].title(),
-                 "schedule_ids":[result["school"][1:2]+result["p"+str(num+1)] for num in range(8)],
+                 "schedule_ids":[result["school"][1:2]+result["p"+str(num+1)].replace(" ", "") for num in range(8)],
                  "schedule_names":schedule_names}
         mongo.db.users.insert(data)
         
         for clas1 in data["schedule_ids"]:
-            if mongo.db.clas.find({'id': clas1}).count() > 0:
-                before = mongo.db.clas.find_one_or_404({"id":clas1})
+            if mongo.db.clas.find({'id': clas1.replace(" ", "")}).count() > 0:
+                before = mongo.db.clas.find_one_or_404({"id":clas1.replace(" ", "")})
                 before["students_id"].append(data["id"])
                 before["students_name"].append(data["name"])
-                mongo.db.clas.update_one({"id":clas1}, {"$set":before})
+                mongo.db.clas.update_one({"id":clas1.replace(" ", "")}, {"$set":before})
                        
             else:
                 num = data["schedule_ids"].index(clas1)
-                data1 = {"id":clas1,
+                data1 = {"id":clas1.replace(" ", ""),
                           "name":convert[result["p"+str(num+1)][:result["p"+str(num+1)].index("-")]],
                           "students_id":[data["id"]],
                           "students_name":[data["name"]]}
