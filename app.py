@@ -200,15 +200,15 @@ def entry():
         c = mongo.db.users.find_one({'id': session["id"]})
         if c:
             return redirect("/")
-        for code in data["schedule_ids"]:
-            code.replace(" ", "")
+
         
         result = request.form#Gets data from form in a dictionary data format
         errors = []
         schedule_names = []
+        
         for num in range(8):
             try:
-                schedule_names.append(convert[result["p"+str(num+1)][:result["p"+str(num+1)].index("-")]])
+                schedule_names.append(convert[ result["p"+str(num+1)][:result["p"+str(num+1)].index("-")].replace(" ", "") ])
             except:
                 errors.append("Issue with code for period #"+str(num+1))
             if ">" in result["p"+str(num+1)] or "<" in result["p"+str(num+1)]:
