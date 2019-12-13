@@ -200,7 +200,8 @@ def entry():
         c = mongo.db.users.find_one({'id': session["id"]})
         if c:
             return redirect("/")
-
+        for code in data["schedule_ids"]:
+            code.replace(" ", "")
         
         result = request.form#Gets data from form in a dictionary data format
         errors = []
