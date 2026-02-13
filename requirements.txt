@@ -9,7 +9,7 @@ Flask-Session==0.3.1
 Flask-SSLify==0.1.5
 flask-talisman==0.7.0
 Flask-WTF==0.14.2
-gunicorn==19.9.0
+gunicorn==22.0.0
 idna==2.8
 itsdangerous==1.1.0
 Jinja2==2.10.1
